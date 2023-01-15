@@ -69,7 +69,7 @@ router.delete("/staff/healthCategory/delete/:hc_id", auth.admin_guard, (req,res)
 })
 
 
-router.get("/staff/healthcategory", async (req,res)=>{
+router.get("/staff/vehicleCategory", async (req,res)=>{
     const healthCategoryList = await healthCategory.find({})
     if(!healthCategoryList){
         res.status(500).json({
@@ -165,7 +165,7 @@ router.put("/staff/appointment/time/delete", async(req,res)=>{
     })
 })
 
-router.get("/staff/get/healthCategoryId/:name", async(req,res)=>{
+router.get("/staff/get/vehicleCategoryId/:name", async(req,res)=>{
     const name = req.params.name;
     const healthCategoryDetails = await healthCategory.findOne({name : name})
     console.log(healthCategoryDetails.data)

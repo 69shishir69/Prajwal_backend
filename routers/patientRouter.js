@@ -9,7 +9,7 @@ const upload = require('../fileUpload/fileUpload');
 
 
 
-router.post("/patient/insert", (req,res) =>{
+router.post("/user/insert", (req,res) =>{
     const email = req.body.email;
 
     patient.findOne({email : email})
@@ -58,7 +58,7 @@ router.post("/patient/insert", (req,res) =>{
 
 
 // Login for patient
-router.post('/patient/login',(req,res)=>{
+router.post('/user/login',(req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
 
@@ -105,7 +105,7 @@ router.get("/patient/:pat_id", async (req,res)=>{
 
 
 // this is dashboard route for patient 
-router.get('/patient/dashboard/get',patient_auth.patient_guard, (req,res)=>{
+router.get('/user/dashboard/get',patient_auth.patient_guard, (req,res)=>{
     // console.log(req);
     res.status(201).json({
         id : req.patientINFO._id,

@@ -8,7 +8,7 @@ const upload = require("../fileUpload/fileUpload")
 
 
 // route to book appointment
-router.post("/patient/bookAppointment/get",auth.patient_guard, async(req,res)=>{
+router.post("/user/bookAppointment/get",auth.patient_guard, async(req,res)=>{
     console.log(req.patientINFO);
     const category = req.body.category;
     const date = req.body.date;
@@ -46,7 +46,7 @@ router.post("/patient/bookAppointment/get",auth.patient_guard, async(req,res)=>{
     }
 })
 
-router.get("/patient/getBookedAppointment/get",auth.patient_guard, async (req,res)=>{
+router.get("/user/getBookedAppointment/get",auth.patient_guard, async (req,res)=>{
     console.log(req.patientINFO)
     const appointmentDetails = await appointment.find({patientId: req.patientINFO._id});
     if(!appointmentDetails){
@@ -59,7 +59,7 @@ router.get("/patient/getBookedAppointment/get",auth.patient_guard, async (req,re
     }
 })
 
-router.get("/patient/getSingleAppointment/:appointmentId", async(req,res)=>{
+router.get("/user/getSingleAppointment/:appointmentId", async(req,res)=>{
     const appointmentId = req.params.appointmentId;
     const appointmentDetails = await appointment.findOne({_id : appointmentId})
     if(!appointmentDetails){
@@ -72,7 +72,7 @@ router.get("/patient/getSingleAppointment/:appointmentId", async(req,res)=>{
     }
 })
 
-router.put("/patient/updateBookedAppointment/get/:appointmentId", auth.patient_guard, async(req,res)=>{
+router.put("/user/updateBookedAppointment/get/:appointmentId", auth.patient_guard, async(req,res)=>{
     
     const fullname = req.body.fullname;
     const mobile = req.body.mobile;
@@ -96,7 +96,7 @@ router.put("/patient/updateBookedAppointment/get/:appointmentId", auth.patient_g
         })
 })
 
-router.delete("/patient/deleteBookedAppointment/get/:appointmentId", auth.patient_guard,(req,res)=>{
+router.delete("/user/deleteBookedAppointment/get/:appointmentId", auth.patient_guard,(req,res)=>{
     const appointmentId = req.params.appointmentId;
     appointment.deleteOne({_id : appointmentId })
     .then(()=>{
@@ -111,7 +111,7 @@ router.delete("/patient/deleteBookedAppointment/get/:appointmentId", auth.patien
 
 // ########################################## for booking doctor appointment $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-router.post("/patient/bookDoctorAppointment/get", auth.patient_guard, async (req,res)=>{
+router.post("/user/bookVehicleAppointment/get", auth.patient_guard, async (req,res)=>{
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     // const time = req.body.time;
@@ -154,7 +154,7 @@ router.post("/patient/bookDoctorAppointment/get", auth.patient_guard, async (req
 })
 
  
-router.get("/patient/getBookedDoctorAppointment/get", auth.patient_guard, async(req,res)=>{
+router.get("/user/getBookedVehicleAppointment/get", auth.patient_guard, async(req,res)=>{
     const doctorBookedAppointment = await doctorAppointment.find({patientId : req.patientINFO._id}).populate("vehicleId").populate("doctorId")
     if(!doctorBookedAppointment){
         res.status(500).json({success : false, msg : "Error no booked appointment"})
@@ -163,7 +163,7 @@ router.get("/patient/getBookedDoctorAppointment/get", auth.patient_guard, async(
     }
 })
 
-router.put("/patient/updateBookedDoctorAppointment/get/:appointmentId", auth.patient_guard, async(req,res)=>{
+router.put("/user/updateBookedVehicleAppointment/get/:appointmentId", auth.patient_guard, async(req,res)=>{
     
     const fullname = req.body.fullname;
     const mobile = req.body.mobile;
@@ -189,7 +189,7 @@ router.put("/patient/updateBookedDoctorAppointment/get/:appointmentId", auth.pat
         })
 })
 
-router.delete("/patient/deleteBookedDoctorAppointment/get/:appointmentId", auth.patient_guard,(req,res)=>{
+router.delete("/user/deleteBookedVehicleAppointment/get/:appointmentId", auth.patient_guard,(req,res)=>{
     console.log(req.params.appointmentId)
     doctorAppointment.deleteOne({_id : req.params.appointmentId })
     .then(()=>{

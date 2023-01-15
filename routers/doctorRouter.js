@@ -105,7 +105,7 @@ router.post('/doctor/register',auth.admin_guard, upload.single('doc_img'),(req,r
 
 
 // Login for doctor
-router.post('/doctor/login',(req,res)=>{
+router.post('/company/login',(req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
 
@@ -159,7 +159,7 @@ router.get('/doctor/dashboard/single',auth.doctor_guard ,(req,res)=>{
 })
 
 
-router.get('/doctor/dashboard/get/admin', auth.admin_guard, async (req,res)=>{
+router.get('/company/dashboard/get/admin', auth.admin_guard, async (req,res)=>{
     console.log("Errororororr")
     const doctor_details = await doctor.find({})
     res.json({
@@ -168,7 +168,7 @@ router.get('/doctor/dashboard/get/admin', auth.admin_guard, async (req,res)=>{
 })
 
 
-router.get("/doctor/category/:department", async(req,res)=>{
+router.get("/company/category/:department", async(req,res)=>{
     const doctor_details = await doctor.find({department : req.params.department})
     res.json({
         details : doctor_details
@@ -250,7 +250,7 @@ router.delete("/doctor/delete/get/:doctor_id",auth.admin_guard,(req,res)=>{
 
 
 // router for getting appointment
-router.get("/doctor/getAppointment/:status", auth.doctor_guard, async(req,res)=>{
+router.get("/company/getAppointment/:status", auth.doctor_guard, async(req,res)=>{
     const appointmentDetails = await doctorAppointment.find({doctorId : req.doctorINFO._id, status : req.params.status}).populate("patientId").populate("vehicleId")
     if(!appointmentDetails){
         res.json({success : false,msg : "Appointment Not Found"})
@@ -260,7 +260,7 @@ router.get("/doctor/getAppointment/:status", auth.doctor_guard, async(req,res)=>
 })
 
 //  for changing the status of the appointment 
-router.put("/doctor/updateAppointmentStatus/:appointmentId", auth.doctor_guard, async(req,res)=>{
+router.put("/company/updateAppointmentStatus/:appointmentId", auth.doctor_guard, async(req,res)=>{
     
     doctorAppointment.updateOne(
             {_id : req.params.appointmentId},
