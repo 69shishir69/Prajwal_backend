@@ -53,7 +53,7 @@ router.get("/vehicle/category/:department", async(req,res)=>{
 })
 
 // register for doctor
-router.post('/doctor/register',auth.admin_guard, upload.single('doc_img'),(req,res)=>{
+router.post('/company/register',auth.admin_guard, upload.single('doc_img'),(req,res)=>{
     const email = req.body.email;
 
     doctor.findOne({email : email})
@@ -132,7 +132,7 @@ router.post('/company/login',(req,res)=>{
 })
 
 
-router.get("/doctor/get/:doc_id", async (req,res)=>{
+router.get("/company/get/:doc_id", async (req,res)=>{
     const doctor_details = await doctor.findOne({_id : req.params.doc_id})
     if(!doctor_details){
         res.json({msg : "Error in retrieving doc"})
@@ -142,7 +142,7 @@ router.get("/doctor/get/:doc_id", async (req,res)=>{
 })
 
 
-router.get('/doctor/dashboard/single',auth.doctor_guard ,(req,res)=>{
+router.get('/company/dashboard/single',auth.doctor_guard ,(req,res)=>{
     res.json({
         id : req.doctorINFO._id,
         fname : req.doctorINFO.fname,
